@@ -1,41 +1,85 @@
-#include “main.h”
+#include "main.h"
+		
+#include <stdlib.h>
+		
 /**
-* allot_grid – allocates a grid, make space and free space
-* @width: take in width of grid
-* @height: height of grid
-* Return: grid with fred spaces
-*/
+		
+ * alloc_grid - nested loop to make grid
+		
+ * @width: width input
+		
+ * @height: height input
+		
+ * Return: pointer to 2 dim. array
+		
+ */
+		
+int **alloc_grid(int width, int height)
+		
+{
+		
+	int **mee;
+		
+	int x, y;
+		
 
-Int **alloc_grid(int width, int height)
-{
-/*Declaring variables*/
-Int **grid;
-Int i, j;
+		
+	if (width <= 0 || height <= 0)
+		
+		return (NULL);
+		
 
-if (width <= 0 || height <=0)
-{
-return (NULL);
-}
+		
+	mee = malloc(sizeof(int *) * height);
+		
 
-grid = malloc(sizeof(int *) * height); /*malloc*/
+		
+	if (mee == NULL)
+		
+		return (NULL);
+		
 
-if (grid ==NULL)
-{
-return (NULL);
-}
-for (i = 0; i <height; i++)
-{
-grid(i) = malloc(sizeof(int) * width);
-if (grid[i] == NULL)
-{
-for (i = i - 1; i >0; i --)
-{
-free(grid[i]);
-}
-free(grid);
-}
-}
-for (i = 0; j <width; j++)
-grid[i][j] = 0;
-return (grid);
+		
+	for (x = 0; x < height; x++)
+		
+	{
+		
+		mee[x] = malloc(sizeof(int) * width);
+		
+
+		
+		if (mee[x] == NULL)
+		
+		{
+		
+			for (; x >= 0; x--)
+		
+				free(mee[x]);
+		
+
+		
+			free(mee);
+		
+			return (NULL);
+		
+		}
+		
+	}
+		
+
+		
+	for (x = 0; x < height; x++)
+		
+	{
+		
+		for (y = 0; y < width; y++)
+		
+			mee[x][y] = 0;
+		
+	}
+		
+
+		
+	return (mee);
+		
 }
